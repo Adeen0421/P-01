@@ -11,7 +11,7 @@ files = st.file_uploader("Upload your CSV or Excel file", type=['csv', 'xlsx'], 
 if files:
     for file in files:
         ext = file.name.split('.')[-1].lower()
-        
+              
         try:
             if ext == 'csv':
                 df = pd.read_csv(file, encoding='utf-8', encoding_errors='ignore')
@@ -43,6 +43,7 @@ if files:
             selected_columns = st.multiselect(f"Select columns - {file.name}", df.columns, default=df.columns)
             df = df[selected_columns]
             st.dataframe(df.head())
+
 
             if st.checkbox(f"Show Chart - {file.name}"):
                 num_cols = df.select_dtypes(include="number")
